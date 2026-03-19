@@ -1,3 +1,5 @@
+https://rainbow-bream-010.notion.site/5-HTTP-325a3228ceb3814db3fdc672b68ced49?source=copy_link
+
 # 5. 응용 계층 - HTTP의 기초
 
 # DNS와 URI/URL
