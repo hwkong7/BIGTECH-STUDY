@@ -1,0 +1,118 @@
+# 서브 쿼리와 조인
+
+## 여러 테이블에 질의하기
+
+![image.png](attachment:fceb2ff6-7ae7-4fd0-846e-c098a9330594:image.png)
+
+- 하나의 SELECT 문으로 여러 테이블 레코드를 조회하는 명령은 간단하다.
+
+## 서브 쿼리
+
+> 내부에 다른 SQL문이 포함되어 있는 SQL문
+> 
+
+SELECT문 안에 SELECT문이 포함된 서브 쿼리
+
+![image.png](attachment:41f1180c-790e-4efe-994b-473507428b86:image.png)
+
+- 외부 쿼리는 users 테이블에서 username과 서브 쿼리의 결과를 조회
+- 서브 쿼리는 posts 테이블을 조회
+
+DELETE문 안에 SELECT문이 포함된 서브 쿼리
+
+![image.png](attachment:12d4eb09-7ed9-487c-9999-074d2eb8e4e2:image.png)
+
+- 외부 쿼리는 posts 테이블에서 user_id가 서브 쿼리의 결과와 같은 레코드를 삭제
+- 서브 쿼리는 users 테이블 조회
+
+## 조인
+
+> 여러 테이블을 하나로 합치는 것
+> 
+
+![image.png](attachment:f355d230-3af1-4aa8-9c97-5afd19c3fbc2:image.png)
+
+```sql
+customers
+- id
+- name
+- age
+- email
+
+orders
+- id
+- customer_id
+- product_id
+- quantity
+- amount
+```
+
+### Inner Join
+
+![image.png](attachment:e593a239-8175-4532-a95b-8c4885a94cc5:image.png)
+
+### LEFT OUTER JOIN
+
+![image.png](attachment:89188e5c-55c2-4fe8-beab-c8f82739c980:image.png)
+
+![image.png](attachment:2bc32b1e-5925-4d75-89a5-551eec9407db:image.png)
+
+### RIGHT OUTER JOIN
+
+![image.png](attachment:7d03b0ab-18f9-4d0b-bee9-4413bc3cf2bc:image.png)
+
+### FULL OUTER JOIN
+
+![image.png](attachment:62af52d7-6243-4b48-97ba-09f8beee0ee3:image.png)
+
+![image.png](attachment:637b03d7-223e-42ea-86e6-0e3a7e995926:image.png)
+
+# 뷰
+
+> SELECT문의 결과로 만들어진 가상의 테이블
+> 
+
+![image.png](attachment:e025888c-5dfa-4c4a-a371-878fabeb8a02:image.png)
+
+- SELECT문의 결과를 뷰로 생성하고, 뷰에 다양한 SQL문을 실행할 수 있음
+- 테이블에 대한 SQL문을 단순화하기 위해 사용
+
+# 인덱스
+
+> RDBMS에서 성능을 향상시키기 위한 대중적인 방법
+> 
+
+![image.png](attachment:6dfe7cf5-ee07-4bd7-8309-4767169d2b10:image.png)
+
+- 책의 사전에 비유
+
+![image.png](attachment:6f4040fb-ecfd-4ee4-a245-b013f63af5f9:image.png)
+
+- B-Tree로 구성
+
+**✅ SortedList**
+
+- DBMS의 인덱스와 같은 구조
+- 저장되는 값을 항상 정렬된 상태로 유지하는 자료구조
+- 데이터가 저장될 때마다 항상 값을 정렬해야 하므로 저장하는 과정이 복잡하고 느림
+- 이미 정렬되어 있어 조회 성능은 빠르다
+
+**✅ ArrayList**
+
+- 값을 저장되는 순서 그대로 유지하는 자료구조
+- 저장된 순서대로 별도의 정렬 없이 그대로 저장
+
+> DBMS에서 인덱스는 데이터의 저장 성능을 희생하고 데이터의 읽기 속도를 높이는 기능이다
+> 
+
+✅ 클러스터링 인덱스
+
+- 클러스터링 인덱스는 테이블의 프라이머리 키에 대해서만 적용
+- PK 값이 변경되면 그 레코드의 물리적인 저장 위치가 바뀌어야 함
+- 인덱스 알고리즘이라기 보다는 테이블 레코드의 저장 방식
+- PK 기반 검색이 매우 빠르며, 대신 레코드의 저장이나 변경이 상대적으로 느림
+
+✅ 세컨더리 인덱스
+
+- 테이블 당 여러개 존재 가능
+- 검색이 클러스터링 인덱스보다 느리
